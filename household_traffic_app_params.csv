@@ -1,0 +1,13 @@
+Application,Category,Notes,Downstream_Mbps_Dist,Upstream_Mbps_Dist,Session_Length_Dist,Mean_Interarrival_Min_per_User,Daily_Active_Users_Fraction
+Long-form video streaming,Video,HD baseline; 30% 4K,"Tri(3,5,7) + 30% Tri(16,20,24)",Negligible,"LogN(median=60, sigma=0.6)",120,0.8
+Short-form/social video,Video (short),"Bursty, frequent","Tri(2,3.5,5)",Negligible,"LogN(median=7, sigma=0.7)",30,0.9
+Cloud gaming,Gaming (cloud),High sustained video,"Tri(12,18,25)","Tri(2,3,5)","LogN(median=60, sigma=0.6)",240,0.1
+Real-time online gaming,Gaming (real-time),"Low bw, latency-sensitive","Tri(0.3,1.0,3)","Tri(0.2,0.6,1.2)","LogN(median=90, sigma=0.6)",180,0.4
+Game downloads/updates,Gaming (downloads),Large patches/installs,Access-limited (50–200),Negligible,Derived from size/throughput,1440,0.3
+Video conferencing,Work/edu,HD single stream,"Tri(1,2,3)","Tri(1,2,3)","LogN(median=45, sigma=0.5)",360,0.3
+Web & social browsing,Web,Many short bursts,"Tri(0.1,0.5,1.5)",Negligible,"LogN(median=10, sigma=0.6)",20,0.95
+Music & podcasts,Audio,Background sessions,"Tri(0.1,0.2,0.4)",Negligible,"LogN(median=60, sigma=0.6)",120,0.6
+Cloud backup/sync,Cloud,Photo/video sync,"Tri(1,3,6)","Tri(2,4,8)","LogN(median=30, sigma=0.7)",720,0.5
+Security cameras,IoT (video),Continuous/diurnal,"Tri(2,4,6) per camera","Tri(0.5,1,2) per camera",Continuous by schedule,9999,0.3
+AR/VR streaming,Immersive,Occasional heavy bw,"Tri(25,40,60)","Tri(2,3,5)","LogN(median=30, sigma=0.6)",720,0.05
+GenAI media (voice/video),GenAI,Emerging; small share,"Tri(2,5,12)","Tri(1,2,5)","LogN(median=8, sigma=0.7)",240,0.1

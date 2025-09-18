@@ -1,0 +1,371 @@
+[
+  {
+    "name": "Long-form video streaming",
+    "daily_active_users_fraction": 0.8,
+    "interarrival_mean_min_per_user": 120,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.1,
+    "diurnal_profile": [
+      0.2,
+      0.1,
+      0.05,
+      0.05,
+      0.1,
+      0.3,
+      0.6,
+      0.8,
+      1.0,
+      1.2,
+      1.3,
+      1.4,
+      1.5,
+      1.5,
+      1.6,
+      1.8,
+      2.0,
+      2.1,
+      2.2,
+      2.0,
+      1.8,
+      1.4,
+      0.8,
+      0.4
+    ]
+  },
+  {
+    "name": "Short-form/social video",
+    "daily_active_users_fraction": 0.9,
+    "interarrival_mean_min_per_user": 30,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.1,
+    "diurnal_profile": [
+      0.2,
+      0.1,
+      0.05,
+      0.05,
+      0.1,
+      0.3,
+      0.6,
+      0.8,
+      1.0,
+      1.2,
+      1.3,
+      1.4,
+      1.5,
+      1.5,
+      1.6,
+      1.8,
+      2.0,
+      2.1,
+      2.2,
+      2.0,
+      1.8,
+      1.4,
+      0.8,
+      0.4
+    ]
+  },
+  {
+    "name": "Cloud gaming",
+    "daily_active_users_fraction": 0.1,
+    "interarrival_mean_min_per_user": 240,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.5,
+    "diurnal_profile": [
+      0.1,
+      0.05,
+      0.05,
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.6,
+      1.0,
+      1.5,
+      1.8,
+      2.0,
+      2.3,
+      2.5,
+      2.8,
+      3.0,
+      3.2,
+      3.0,
+      2.8,
+      2.5,
+      1.8,
+      1.0,
+      0.5,
+      0.3
+    ]
+  },
+  {
+    "name": "Real-time online gaming",
+    "daily_active_users_fraction": 0.4,
+    "interarrival_mean_min_per_user": 180,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.5,
+    "diurnal_profile": [
+      0.1,
+      0.05,
+      0.05,
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.6,
+      1.0,
+      1.5,
+      1.8,
+      2.0,
+      2.3,
+      2.5,
+      2.8,
+      3.0,
+      3.2,
+      3.0,
+      2.8,
+      2.5,
+      1.8,
+      1.0,
+      0.5,
+      0.3
+    ]
+  },
+  {
+    "name": "Game downloads/updates",
+    "daily_active_users_fraction": 0.3,
+    "interarrival_mean_min_per_user": 1440,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.1,
+    "diurnal_profile": [
+      2.0,
+      1.8,
+      1.5,
+      1.3,
+      1.1,
+      1.0,
+      0.8,
+      0.6,
+      0.5,
+      0.4,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.4,
+      0.5,
+      0.8,
+      1.0,
+      1.2,
+      1.5,
+      1.8,
+      2.0,
+      2.2,
+      2.2
+    ]
+  },
+  {
+    "name": "Video conferencing",
+    "daily_active_users_fraction": 0.3,
+    "interarrival_mean_min_per_user": 360,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.5,
+    "diurnal_profile": [
+      0.2,
+      0.1,
+      0.05,
+      0.05,
+      0.1,
+      0.3,
+      0.6,
+      0.8,
+      1.0,
+      1.2,
+      1.3,
+      1.4,
+      1.5,
+      1.5,
+      1.6,
+      1.8,
+      2.0,
+      2.1,
+      2.2,
+      2.0,
+      1.8,
+      1.4,
+      0.8,
+      0.4
+    ]
+  },
+  {
+    "name": "Web & social browsing",
+    "daily_active_users_fraction": 0.95,
+    "interarrival_mean_min_per_user": 20,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.1,
+    "diurnal_profile": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Music & podcasts",
+    "daily_active_users_fraction": 0.6,
+    "interarrival_mean_min_per_user": 120,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.1,
+    "diurnal_profile": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "Cloud backup/sync",
+    "daily_active_users_fraction": 0.5,
+    "interarrival_mean_min_per_user": 720,
+    "session_length": {
+      "mean": 10.0,
+      "sigma": 0.5
+    },
+    "bitrate": {
+      "min": 0.1,
+      "mode": 0.5,
+      "max": 1.0
+    },
+    "upstream_factor": 0.5,
+    "diurnal_profile": [
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2
+    ]
+  }
+]
