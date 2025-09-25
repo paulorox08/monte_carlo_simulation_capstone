@@ -38,7 +38,7 @@ def simulate_one_day(n_users=4, minutes_per_day=1440):
                     break
                 session_length = max(1, int(np.random.lognormal(
                     mean=np.log(app["session_length"]["mean"]),
-                    sigma=app["session_length"]["sigma"]) * 60))
+                    sigma=app["session_length"]["sigma"])))
                 bitrate = triangular_sample(
                     app["bitrate"]["min"],
                     app["bitrate"]["mode"],
@@ -78,6 +78,8 @@ def analyze_results(peak_demands):
     }
     return stats
 
+# === Plots ===
+
 def plot_analysis(peak_demands):
     plt.figure(figsize=(10,5))
     plt.hist(peak_demands, bins=50, density=True, alpha=0.6)
@@ -85,7 +87,7 @@ def plot_analysis(peak_demands):
     plt.xlabel("Peak Mbps")
     plt.ylabel("Density")
     plt.tight_layout()
-    plt.savefig("peak_histogram.png")
+    plt.savefig("peak_histogram_test_newer.png")
     plt.show()
 
     # CDF Plot
@@ -98,7 +100,7 @@ def plot_analysis(peak_demands):
     plt.ylabel("CDF")
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig("peak_cdf.png")
+    plt.savefig("peak_cdf_test_newer.png")
     plt.show()
 
 def plot_stacked_area(df):
@@ -109,7 +111,7 @@ def plot_stacked_area(df):
         start, end = row["start_min"], row["start_min"] + row["duration_min"]
         app_totals[row["app"]][start:end] += row["down_Mbps"]
 
-    # Sort apps by total traffic for a cleaner legend
+    # Sort apps by total traffic
     app_totals = dict(sorted(app_totals.items(), key=lambda x: x[1].sum(), reverse=True))
 
     plt.figure(figsize=(12,6))
@@ -121,7 +123,7 @@ def plot_stacked_area(df):
     plt.xlabel("Hour of Day")
     plt.ylabel("Downstream Mbps")
     plt.tight_layout()
-    plt.savefig("stacked_area_apps.png")
+    plt.savefig("stacked_area_apps_test_newer.png")
     plt.show()
 
     # Hourly summary table
@@ -131,17 +133,112 @@ def plot_stacked_area(df):
     print("\n=== Hourly Average Bandwidth per App (Mbps) ===")
     print(hourly_summary)
 
-def plot_hourly_profile(all_down_profiles):
-    hourly_means = all_down_profiles.reshape(all_down_profiles.shape[0], 24, 60).mean(axis=(0,2))
-    plt.figure(figsize=(10,5))
-    plt.plot(range(24), hourly_means, marker="o")
-    plt.title("Average Hourly Downstream Load")
+# === New Plots ===
+
+def plot_total_traffic(df):
+    minutes_per_day = 1440
+    down_total = np.zeros(minutes_per_day)
+    for _, row in df.iterrows():
+        start, end = row["start_min"], row["start_min"] + row["duration_min"]
+        down_total[start:end] += row["down_Mbps"]
+
+    plt.figure(figsize=(12,6))
+    plt.plot(np.arange(minutes_per_day)/60, down_total, label="Total Downstream")
     plt.xlabel("Hour of Day")
-    plt.ylabel("Average Mbps")
+    plt.ylabel("Mbps")
+    plt.title("Aggregate Downstream Bandwidth Over a Day")
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig("hourly_profile.png")
+    plt.savefig("total_traffic_over_day_test_newer.png")
     plt.show()
+
+def plot_boxplot(peak_demands):
+    plt.figure(figsize=(6,6))
+    plt.boxplot(peak_demands, vert=True, patch_artist=True)
+    plt.ylabel("Peak Mbps")
+    plt.title("Boxplot of Peak Demand Across Simulations")
+    plt.tight_layout()
+    plt.savefig("peak_boxplot_test_newer.png")
+    plt.show()
+
+def plot_app_hour_heatmap(df):
+    hourly_usage = pd.DataFrame(index=range(24), columns=APP_NAMES, data=0.0)
+    for _, row in df.iterrows():
+        for h in range(row["start_min"]//60, (row["start_min"]+row["duration_min"])//60 + 1):
+            if h < 24:
+                hourly_usage.at[h, row["app"]] += row["down_Mbps"]
+
+    plt.figure(figsize=(12,6))
+    plt.imshow(hourly_usage.T, aspect="auto", cmap="viridis")
+    plt.colorbar(label="Mbps")
+    plt.xticks(range(24), labels=range(24))
+    plt.yticks(range(len(APP_NAMES)), APP_NAMES)
+    plt.xlabel("Hour of Day")
+    plt.ylabel("Application")
+    plt.title("Heatmap of Average Bandwidth Usage (App vs Hour)")
+    plt.tight_layout()
+    plt.savefig("app_hour_heatmap_test_newer.png")
+    plt.show()
+
+def plot_users_vs_peak(iterations=1000, n_users_range=(2,6)):
+    user_counts, peaks = [], []
+    for i in range(iterations):
+        n_users = np.random.randint(n_users_range[0], n_users_range[1]+1)
+        df = simulate_one_day(n_users=n_users)
+        minutes_per_day = 1440
+        down_total = np.zeros(minutes_per_day)
+        for _, row in df.iterrows():
+            start, end = row["start_min"], row["start_min"] + row["duration_min"]
+            down_total[start:end] += row["down_Mbps"]
+        user_counts.append(n_users)
+        peaks.append(down_total.max())
+
+    plt.figure(figsize=(8,6))
+    plt.scatter(user_counts, peaks, alpha=0.3)
+    plt.xlabel("Number of Users")
+    plt.ylabel("Peak Demand (Mbps)")
+    plt.title("Peak Bandwidth vs Household Size")
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig("users_vs_peak_test_newer.png")
+    plt.show()
+
+def plot_exceedance(peak_demands):
+    sorted_demands = np.sort(peak_demands)
+    exceedance = 1 - (np.arange(len(sorted_demands)) / len(sorted_demands))
+    plt.figure(figsize=(10,5))
+    plt.semilogy(sorted_demands, exceedance)
+    plt.title("Exceedance Probability of Peak Demand")
+    plt.xlabel("Peak Mbps")
+    plt.ylabel("P( Demand > x )")
+    plt.grid(True, which="both")
+    plt.tight_layout()
+    plt.savefig("peak_exceedance_test_newer.png")
+    plt.show()
+
+# === Main ===
+
+# def main():
+#     print("Running Monte Carlo simulation with 10,000 iterations...")
+#     peak_demands = monte_carlo_simulation()
+#     stats = analyze_results(peak_demands)
+#     print("\n=== Summary Statistics ===")
+#     for k,v in stats.items():
+#         print(f"{k}: {v:.2f}")
+
+#     # One-day example for breakdown plots
+#     df_one_day = simulate_one_day()
+
+#     # Original plots
+#     plot_analysis(peak_demands)
+#     plot_stacked_area(df_one_day)
+
+#     # New plots
+#     plot_total_traffic(df_one_day)
+#     plot_boxplot(peak_demands)
+#     plot_app_hour_heatmap(df_one_day)
+#     plot_users_vs_peak()
+#     plot_exceedance(peak_demands)
 
 def main():
     print("Running Monte Carlo simulation with 10,000 iterations...")
@@ -151,10 +248,22 @@ def main():
     for k,v in stats.items():
         print(f"{k}: {v:.2f}")
 
+    # One-day example for breakdown plots (fixed seed for reproducibility)
+    np.random.seed(42)   # <--- ensures consistent one-day plots
     df_one_day = simulate_one_day()
+    np.random.seed(None) # <--- restore randomness afterwards
+
+    # Original plots
     plot_analysis(peak_demands)
     plot_stacked_area(df_one_day)
-    plot_hourly_profile(df_one_day)
+
+    # New plots
+    plot_total_traffic(df_one_day)
+    plot_boxplot(peak_demands)
+    plot_app_hour_heatmap(df_one_day)
+    plot_users_vs_peak()
+    plot_exceedance(peak_demands)
+
 
 if __name__ == "__main__":
     main()
