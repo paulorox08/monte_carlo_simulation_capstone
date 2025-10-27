@@ -67,7 +67,7 @@ def monte_carlo_simulation(iterations=10000, n_users_range=(2,6)):
         peak_demands.append(down_total.max())
     return np.array(peak_demands)
 
-def analyze_results(peak_demands):
+def analyse_results(peak_demands):
     stats = {
         "mean": np.mean(peak_demands),
         "median": np.median(peak_demands),
@@ -216,34 +216,10 @@ def plot_exceedance(peak_demands):
     plt.savefig("peak_exceedance_test_newer.png")
     plt.show()
 
-# === Main ===
-
-# def main():
-#     print("Running Monte Carlo simulation with 10,000 iterations...")
-#     peak_demands = monte_carlo_simulation()
-#     stats = analyze_results(peak_demands)
-#     print("\n=== Summary Statistics ===")
-#     for k,v in stats.items():
-#         print(f"{k}: {v:.2f}")
-
-#     # One-day example for breakdown plots
-#     df_one_day = simulate_one_day()
-
-#     # Original plots
-#     plot_analysis(peak_demands)
-#     plot_stacked_area(df_one_day)
-
-#     # New plots
-#     plot_total_traffic(df_one_day)
-#     plot_boxplot(peak_demands)
-#     plot_app_hour_heatmap(df_one_day)
-#     plot_users_vs_peak()
-#     plot_exceedance(peak_demands)
-
 def main():
     print("Running Monte Carlo simulation with 10,000 iterations...")
     peak_demands = monte_carlo_simulation()
-    stats = analyze_results(peak_demands)
+    stats = analyse_results(peak_demands)
     print("\n=== Summary Statistics ===")
     for k,v in stats.items():
         print(f"{k}: {v:.2f}")
